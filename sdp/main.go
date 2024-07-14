@@ -62,11 +62,6 @@ type (
 		State     *State
 		Acceptors []*Node
 	}
-
-	UserRequest struct {
-		operation string
-		value     int
-	}
 )
 
 func (p ProposeNumber) Compare(p2 ProposeNumber) int {
@@ -143,12 +138,7 @@ func (n *Node) Do(val string) {
 		return nil
 	}
 
-	for {
-		pn := phase1()
-		err := phase2(pn)
-		if err == nil {
-			break
-		}
+	for phase2(phase1()) != nil {
 	}
 }
 
